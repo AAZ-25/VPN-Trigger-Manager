@@ -1,0 +1,35 @@
+name: Build DEB
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-rootless:
+    runs-on: macos-15
+    steps:
+      - name: Check out source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Install dependencies
+        run: brew install ldid xz
+      - name: Install build tools
+        run: |
+          git clone --filter=blob:none --no-checkout https://github.com/theos/theos.git "$HOME/theos"
+          git -C "$HOME/theos" checkout 5280bd038207e14f8bd76f5417aa2fe641c03228
+          git -C "$HOME/theos" submodule update --init --recursive
+          git clone --filter=blob:none --no-checkout https://github.com/theos/sdks.git "$RUNNER_TEMP/theos-sdks"
+          git -C "$RUNNER_TEMP/theos-sdks" checkout 0222fd5413cf4b9af096f37b4621afa2688572f7
+          mkdir -p "$HOME/theos/sdks"
+          cp -R "$RUNNER_TEMP/theos-sdks/"*.sdk "$HOME/theos/sdks/"
+      - name: Build package
+        run: |
+          export THEOS="$HOME/theos"
+          make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
+      - name: Upload package
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: VPN-Trigger-Manager-rootless
+          path: packages/*.deb
+          if-no-files-found: error

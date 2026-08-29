@@ -1,0 +1,32 @@
+name: Publish beta release
+
+on:
+  workflow_run:
+    workflows: [Build DEB]
+    types: [completed]
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  release:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download package
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: VPN-Trigger-Manager-rootless
+          path: package
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          DEB=$(find package -name '*.deb' -print -quit)
+          test -n "$DEB"
+          VERSION=$(dpkg-deb -f "$DEB" Version)
+          TAG="v${VERSION//~/-}"
+          gh release create "$TAG" "$DEB" --repo "$GITHUB_REPOSITORY" --title "$TAG" --notes "Beta test." --prerelease

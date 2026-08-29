@@ -1,0 +1,10 @@
+{
+    entry = {
+        bundle = VPNTriggerManagerPrefs;
+        cell = PSLinkCell;
+        detail = VTMRootListController;
+        isController = 1;
+        label = "VPN Trigger Manager";
+    };
+}
+

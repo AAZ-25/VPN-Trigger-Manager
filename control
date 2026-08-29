@@ -1,0 +1,9 @@
+Package: com.aaz.vpntriggermanager
+Name: VPN Trigger Manager
+Version: 0.3.0~beta3
+Architecture: iphoneos-arm64
+Description: Disconnects only a temporary Packet Tunnel VPN that starts during an incoming caller lookup.
+Maintainer: AAZ
+Author: AAZ
+Section: Tweaks
+Depends: mobilesubstrate, preferenceloader

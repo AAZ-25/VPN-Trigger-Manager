@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+<key>title</key><string>VPN Trigger Manager</string>
+<key>items</key><array>
+<dict><key>cell</key><string>PSGroupCell</string><key>label</key><string>GENERAL</string><key>footerText</key><string>Preference changes apply immediately; a respring is normally not required.</string></dict>
+<dict><key>cell</key><string>PSSwitchCell</string><key>label</key><string>Enable Tweak</string><key>defaults</key><string>com.aaz.vpntriggermanager</string><key>key</key><string>enabled</string><key>default</key><true/><key>PostNotification</key><string>com.aaz.vpntriggermanager/preferences.changed</string></dict>
+<dict><key>cell</key><string>PSGroupCell</string><key>label</key><string>VPN HANDLING</string><key>footerText</key><string>Only a Packet Tunnel VPN that becomes active during the call is stopped. Existing Packet Tunnel connections are preserved. Personal VPN is preserved unless enabled below.</string></dict>
+<dict><key>cell</key><string>PSSwitchCell</string><key>label</key><string>Stop Personal VPN</string><key>defaults</key><string>com.aaz.vpntriggermanager</string><key>key</key><string>stopPersonalVPN</string><key>default</key><false/><key>PostNotification</key><string>com.aaz.vpntriggermanager/preferences.changed</string></dict>
+<dict><key>cell</key><string>PSSwitchCell</string><key>label</key><string>Disable Connect On Demand</string><key>defaults</key><string>com.aaz.vpntriggermanager</string><key>key</key><string>disableOnDemand</string><key>default</key><false/><key>PostNotification</key><string>com.aaz.vpntriggermanager/preferences.changed</string></dict>
+<dict><key>cell</key><string>PSGroupCell</string><key>label</key><string>RELIABILITY</string><key>footerText</key><string>Verification confirms disconnection. Retry sends one additional stop request if the target remains active.</string></dict>
+<dict><key>cell</key><string>PSSwitchCell</string><key>label</key><string>Verify Disconnection</string><key>defaults</key><string>com.aaz.vpntriggermanager</string><key>key</key><string>verifyDisconnect</string><key>default</key><true/><key>PostNotification</key><string>com.aaz.vpntriggermanager/preferences.changed</string></dict>
+<dict><key>cell</key><string>PSSwitchCell</string><key>label</key><string>Retry Once If Needed</string><key>defaults</key><string>com.aaz.vpntriggermanager</string><key>key</key><string>retryDisconnect</string><key>default</key><true/><key>PostNotification</key><string>com.aaz.vpntriggermanager/preferences.changed</string></dict>
+<dict><key>cell</key><string>PSGroupCell</string><key>label</key><string>TESTING</string><key>footerText</key><string>The test simulates an incoming call for 15 seconds. Auto Start attempts to connect an available Packet Tunnel; turn it off to connect manually during the test.</string></dict>
+<dict><key>cell</key><string>PSSwitchCell</string><key>label</key><string>Auto Start VPN During Test</string><key>defaults</key><string>com.aaz.vpntriggermanager</string><key>key</key><string>autoStartTestVPN</string><key>default</key><true/><key>PostNotification</key><string>com.aaz.vpntriggermanager/preferences.changed</string></dict>
+<dict><key>cell</key><string>PSButtonCell</string><key>label</key><string>Run Simulated Call Test</string><key>action</key><string>runTest</string></dict>
+<dict><key>cell</key><string>PSButtonCell</string><key>label</key><string>Show Last Test Result</string><key>action</key><string>showLastTestResult</string></dict>
+<dict><key>cell</key><string>PSGroupCell</string><key>label</key><string>MAINTENANCE</string><key>footerText</key><string>Use Respring to fully reload SpringBoard after installing or when troubleshooting.</string></dict>
+<dict><key>cell</key><string>PSButtonCell</string><key>label</key><string>Respring</string><key>action</key><string>respring</string></dict>
+<dict><key>cell</key><string>PSGroupCell</string><key>label</key><string>DIAGNOSTICS</string><key>footerText</key><string>Logging is off by default. When enabled, the log rotates after 1 MB and records only technical states.</string></dict>
+<dict><key>cell</key><string>PSSwitchCell</string><key>label</key><string>Diagnostic Logging</string><key>defaults</key><string>com.aaz.vpntriggermanager</string><key>key</key><string>loggingEnabled</string><key>default</key><false/><key>PostNotification</key><string>com.aaz.vpntriggermanager/preferences.changed</string></dict>
+<dict><key>cell</key><string>PSGroupCell</string><key>label</key><string>ABOUT</string><key>footerText</key><string>VPN Trigger Manager — Beta software developed by AAZ.</string></dict>
+</array>
+</dict></plist>
